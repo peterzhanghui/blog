@@ -3,6 +3,7 @@
 **Markdown 是一种轻量级的「标记语言」**
 
 ![markdown](https://www.mdeditor.com/images/logos/markdown.png "markdown")
+![本地图片](./img/wxShare.png "分享配置前后对比")
 
 Markdown 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的 HTML 页面，Markdown 文件的后缀名便是“.md”
 
