@@ -239,9 +239,11 @@ function getTaskList() {
         var list = child.find(className('android.view.View'));
        
         if (list.length > 5) {
-            var title = list.get(2).text; //任务名称  强国运动
+            var title = list.get(2).text(); //任务名称  强国运动
 
-            var content = list.get(4).text;//任务进度  已获0分/每周上限2分
+            var content = list.get(4).text();//任务进度  已获0分/每周上限2分
+            console.log(title );
+            console.log(content);
             
             if (title && content) {
                 var integralContent = content.split('/');
@@ -270,10 +272,17 @@ function getTaskList() {
     }
 };
 
-
+/** 
+* @method    判断任务是否完成
+*/
 function doUnfinishedTask(){
     var flag = 0;//判断是否完成所有任务满分的标志
     var read_article_flag = 2 //判断阅读文章任务是否已完成，作为参数传入视听学习任务的new_vedio_list用于控件寻找
+    // var methodsData= [{
+    //     title: '',
+    //     methods: 'readArticle',
+    //     params: ''
+    // }]
     for(i=0;i<taskInfoList.length;i++){
         var task = taskInfoList[i];
         // log(task);
@@ -281,7 +290,7 @@ function doUnfinishedTask(){
         if(task.getIntegral < task.targetIntegral){
             flag = 1;
             // log('未达成满分的任务有：'+task.title)
-            if(task.title=='阅读文章'){
+            if(task.title=='我要选读文章'){
                 rest_num = task.targetIntegral-task.getIntegral;
                 read_article_flag = 2;
                 readArticle(rest_num,8,false);//默认阅读8s，执行短时阅读任务
@@ -292,21 +301,7 @@ function doUnfinishedTask(){
                 learnVideo(rest_num,read_article_flag,8,false);//默认观看8s,执行短时视听任务
                 continue;
             }
-            else if(task.title=='每日答题'){
-                sleep(2000)
-                toastLog('开始执行每日答题任务(暂未开发)')
-                continue;
-            }
-            else if(task.title=='每周答题'){
-                toastLog('开始执行每周答题任务(暂未开发)')
-                sleep(2000)
-                continue;
-            }
-            else if(task.title=='专项答题'){
-                toastLog('开始执行专项答题任务(暂未开发)')
-                sleep(2000)
-                continue;
-            }
+            
             else if(task.title=='订阅'){
                 rest_num = task.targetIntegral-task.getIntegral;
                 subscribe(rest_num);
@@ -328,6 +323,12 @@ function doUnfinishedTask(){
                 localChannel();
                 continue;
             }
+            else {
+                sleep(2000)
+                toastLog('开始执行每日答题任务(暂未开发)')
+                continue;
+            }
+           
             
         }
 
