@@ -230,18 +230,14 @@ function getTaskList() {
     }
     // sleep(8000);
     // 获取任务列表
-    taskInfoList = []; // 重置
+     taskInfoList = []; // 重置
     className("android.widget.ListView").findOne().children().forEach(function (child) {
         var list = child.find(className('android.view.View'));
        
-        
-        // log(list)
         if (list.length > 5) {
-            var title = list.get(2).contentDescription;
-            console.log(title);
+            var title = list.get(2).text; //任务名称  强国运动
 
-            var content = list.get(4).contentDescription;
-            console.log(content);
+            var content = list.get(4).text;//任务进度  已获0分/每周上限2分
             
             if (title && content) {
                 var integralContent = content.split('/');
