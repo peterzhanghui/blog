@@ -175,9 +175,10 @@ ui.stop.on("click",function(){
     toast("已终止执行脚本");
 });
 
-
+/** 
+* @method    脚本的主逻辑
+*/
 function main() {
-    // 这里写脚本的主逻辑
     threads.start(function () {
         if(!requestScreenCapture()){
             toastLog("请先开启截图权限，以执行收藏任务！");
@@ -212,6 +213,9 @@ function main() {
 
 var taskInfoList = []; // 装任务列表
 
+/** 
+* @method    getTaskList 获取任务列表
+*/
 function getTaskList() {
     // 从主页到我的主页
     className("android.widget.TextView").id('comm_head_xuexi_mine').findOne().click();
@@ -952,7 +956,7 @@ function subscribe(num){
                     if(num>0&&subscribed_accounts.indexOf(account_name[0].text())==-1)//说明数组中不存在这个元素,则订阅他
                     {
                         num--;
-                        subscribed_accounts.push(account_name[0].text());
+                        subscribed_accounts.push(account_name[0].text());  // debugger问题
                         subscribe_icon = item.find(className("android.widget.LinearLayout"))[1];
                         // log("subscribe_icon:"+subscribe_icon)
                         toastLog("正在订阅...");
