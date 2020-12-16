@@ -238,13 +238,13 @@ function getTaskList() {
     className("android.widget.ListView").findOne().children().forEach(function (child) {
         var list = child.find(className('android.view.View'));
 
-        log(list)
+        // log(list)
         if (list.length > 5) {
             var title = list.get(2).text(); //任务名称  强国运动
 
             var content = list.get(4).text();//任务进度  已获0分/每周上限2分
-            console.log(title );
-            console.log(content);
+            // console.log(title );
+            // console.log(content);
             
             if (title && content) {
                 var integralContent = content.split('/');
@@ -426,9 +426,12 @@ function readArticle(num,time,isLong){
                                     toastLog("还剩"+left_time+"s阅读时间...");
                                     //未防止息屏的唤醒屏幕操作
                                     device.wakeUp();
+                                    if (left_time == 0) {
+                                        back();
+                                    }
                                 }
                             }
-                            back();
+                            // back();
                             // className("android.widget.ImageView").depth(11).findOne().click();
                             sleep(2000);
                             //返回之后看积分是否变化，若未变化，num++
@@ -487,7 +490,7 @@ function readArticle1(num,time,isLong){
     //先看右上角总积分，如果看完某文章，积分没变，说明该文章以前看过，不算有效文章，num不减
     var origin_score = id("comm_head_xuexi_score").findOne().getText();
     log("origin_score:"+origin_score)
-    var newListView = className("android.widget.ListView").depth(20).findOne();
+    var newListView = className("android.widget.ListView").depth(21).findOne();
     //阅读文章
     //为长时阅读设定积分未变化停止机制，如果检测到积分未变化2次，停止阅读
     var stop_flag = 0;
@@ -501,10 +504,10 @@ function readArticle1(num,time,isLong){
             //如果进入这个条件，说明控件找成了Rect(0, 357 - 0, 2195),是错的
             log("检测到newListView控件不对，自动修改...")
             listViewFlag = 1;
-            newListView = className("android.widget.ListView").depth(20).findOnce(1);
+            newListView = className("android.widget.ListView").depth(21).findOnce(1);
         }
         else{
-            newListView = className("android.widget.ListView").depth(20).findOne();
+            newListView = className("android.widget.ListView").depth(21).findOne();
         }
         log('newListView:'+newListView)
         if(newListView!=null)
@@ -596,9 +599,9 @@ function learnVideo(num,read_article_flag,time,isLong){
     log("origin_score:"+origin_score)
     //进入第一频道
     className("android.widget.TextView").text("第一频道").findOne().parent().click();
-    var new_vedio_list = className("android.widget.ListView").depth(20).findOnce(read_article_flag);
+    var new_vedio_list = className("android.widget.ListView").depth(21).findOnce(read_article_flag);
     while(num>0){
-        new_vedio_list = className("android.widget.ListView").depth(20).findOnce(read_article_flag);
+        new_vedio_list = className("android.widget.ListView").depth(21).findOnce(read_article_flag);
         log('new_vedio_list:'+new_vedio_list)
         if(new_vedio_list!=null)
         {
@@ -676,13 +679,13 @@ function learnVideo(num,read_article_flag,time,isLong){
             if(read_article_flag==2)
             {
                 read_article_flag = 1;
-                new_vedio_list = className("android.widget.ListView").depth(20).findOnce(read_article_flag);
+                new_vedio_list = className("android.widget.ListView").depth(21).findOnce(read_article_flag);
                 log("read_article_flag = 1的new_vedio_list："+new_vedio_list)
             }
             else
             {
                 read_article_flag = 2;
-                new_vedio_list = className("android.widget.ListView").depth(20).findOnce(read_article_flag);
+                new_vedio_list = className("android.widget.ListView").depth(21).findOnce(read_article_flag);
                 log("read_article_flag = 2的new_vedio_list："+new_vedio_list)
             }
             new_vedio_list.scrollDown();
@@ -704,7 +707,7 @@ function collect(){
     className("android.widget.TextView").text("要闻").findOne().parent().click();
     sleep(1000);
     //阅读文章
-    var newListView = className("android.widget.ListView").depth(20).findOnce(1);
+    var newListView = className("android.widget.ListView").depth(21).findOnce(1);
     // log('newListView:'+newListView)
     var num = 2;//待收藏文章数
     while(newListView!=null&&num>0)
@@ -754,7 +757,7 @@ function collect(){
         }
         newListView.scrollDown();
         sleep(2000);
-        newListView = className("android.widget.ListView").depth(20).findOnce(1);
+        newListView = className("android.widget.ListView").depth(21).findOnce(1);
     } 
     toastLog('收藏任务执行结束！d==(￣▽￣*)b')
     //点击学习控件回到新闻首页
@@ -771,7 +774,7 @@ function share(){
     //点击要闻
     className("android.widget.TextView").text("要闻").findOne().parent().click();
     //阅读文章
-    var newListView = className("android.widget.ListView").depth(20).findOnce(1);
+    var newListView = className("android.widget.ListView").depth(21).findOnce(1);
     if(newListView!=null)
     {
         var newslist = newListView.children();
@@ -823,7 +826,7 @@ function comment(){
     //点击要闻
     className("android.widget.TextView").text("要闻").findOne().parent().click();
     //阅读文章
-    var newListView = className("android.widget.ListView").depth(20).findOnce(1);
+    var newListView = className("android.widget.ListView").depth(21).findOnce(1);
     if(newListView!=null)
     {
         var newslist = newListView.children();
@@ -945,12 +948,14 @@ function subscribe(num){
         //点击添加
         className("android.widget.TextView").text("添加").findOne().click();
         //在添加里面逐一扫描每个订阅号是否在上面的已订阅中，如果没匹配到，则订阅这个公众号,订阅num个即可
+        // accounts_pool = className("android.widget.ListView").depth(13).findOne();
         accounts_pool = className("android.widget.ListView").depth(13).findOne();
+        accounts_pool_type = className("android.widget.ListView").depth(13).findOnce(0);
         var bottom_flag = 0;
         while(accounts_pool!=null&&num>0)
         {
             sleep(1000);
-            var frameLayoutList = accounts_pool.children();
+            var frameLayoutList = accounts_pool.children(); // 左侧导航
             frameLayoutList.forEach(function(item,index){
                 if(item.className()=='android.widget.FrameLayout')
                 {
