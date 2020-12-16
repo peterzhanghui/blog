@@ -237,7 +237,8 @@ function getTaskList() {
      taskInfoList = []; // 重置
     className("android.widget.ListView").findOne().children().forEach(function (child) {
         var list = child.find(className('android.view.View'));
-       
+
+        log(list)
         if (list.length > 5) {
             var title = list.get(2).text(); //任务名称  强国运动
 
@@ -393,11 +394,11 @@ function readArticle(num,time,isLong){
     var origin_score = id("comm_head_xuexi_score").findOne().getText();
     sleep(1500);
     log("origin_score:"+origin_score)
-    var newListView = className("android.widget.ListView").depth(20).findOnce(1);
+    var newListView = className("android.widget.ListView").depth(21).findOnce();
     //阅读文章
     while(num>0){
-        newListView = className("android.widget.ListView").depth(20).findOnce(1);
-        log('newListView:'+newListView)
+        newListView = className("android.widget.ListView").depth(21).findOnce();
+        // log('newListView:'+newListView)
         sleep(1000);
         if(newListView!=null)
         {
