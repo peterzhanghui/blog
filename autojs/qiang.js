@@ -303,11 +303,11 @@ function doUnfinishedTask(){
                 continue;
             }
             
-            else if(task.title=='订阅'){
-                rest_num = task.targetIntegral-task.getIntegral;
-                subscribe(rest_num);
-                continue;
-            }
+            // else if(task.title=='订阅'){
+            //     rest_num = task.targetIntegral-task.getIntegral;
+            //     subscribe(rest_num);
+            //     continue;
+            // }
             else if(task.title=='分享'){
                 share();
                 continue;
