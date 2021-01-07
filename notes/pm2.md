@@ -44,6 +44,12 @@ pm2 researt all/name
 pm2 delete all/name
 ```
 
+pm2 查看实时的日志输出
+
+```
+pm2 logs
+```
+
 pm2 错误日志保存地址
 
 ```
