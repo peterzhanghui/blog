@@ -34,28 +34,27 @@ sudo vim /etc/hosts
 
 dns 查询工具
 
-- [站长工具 dns 查询](http://tool.chinaz.com/dns/)
-- [ipaddress.com](https://www.ipaddress.com/)
-- [ipaddress.com](https://www.ipaddress.com/)
+- [站长工具 dns 查询](http://tool.chinaz.com/dns/) 推荐的 ip 不太稳定
+- [ipaddress.com](https://www.ipaddress.com/) 推荐的更稳定
 
 ```
 # GitHub Start
 # 192.30.253.112 github.com
 192.30.253.119 gist.github.com
-151.101.100.133 assets-cdn.github.com
-151.101.100.133 raw.githubusercontent.com
-151.101.100.133 gist.githubusercontent.com
-151.101.100.133 cloud.githubusercontent.com
-151.101.100.133 camo.githubusercontent.com
-151.101.100.133 avatars0.githubusercontent.com
-151.101.100.133 avatars1.githubusercontent.com
-151.101.100.133 avatars2.githubusercontent.com
-151.101.100.133 avatars3.githubusercontent.com
-151.101.100.133 avatars4.githubusercontent.com
-151.101.100.133 avatars5.githubusercontent.com
-151.101.100.133 avatars6.githubusercontent.com
-151.101.100.133 avatars7.githubusercontent.com
-151.101.100.133 avatars8.githubusercontent.com
+199.232.96.133 assets-cdn.github.com
+199.232.96.133 raw.githubusercontent.com
+199.232.96.133 gist.githubusercontent.com
+199.232.96.133 cloud.githubusercontent.com
+199.232.96.133 camo.githubusercontent.com
+199.232.96.133 avatars0.githubusercontent.com
+199.232.96.133 avatars1.githubusercontent.com
+199.232.96.133 avatars2.githubusercontent.com
+199.232.96.133 avatars3.githubusercontent.com
+199.232.96.133 avatars4.githubusercontent.com
+199.232.96.133 avatars5.githubusercontent.com
+199.232.96.133 avatars6.githubusercontent.com
+199.232.96.133 avatars7.githubusercontent.com
+199.232.96.133 avatars8.githubusercontent.com
 # GitHub End
 ```
 
