@@ -13,14 +13,10 @@ var obj1 = {
 };
 var obj2 = deepClone(obj1);
 
-obj2.name = "obj2";
-obj2.car.push("宝马2");
-obj2.car[2].name = "特斯拉2";
-obj2.car[3].push("小鹏2");
-obj2.job.comany = "alibaba22";
-
-console.log(obj1);
-console.log(obj2);
+console.log(obj1,obj2);
+console.log(obj2.car === obj1.car);
+console.log(obj2.job === obj1.job);
+console.log(obj2.lanage === obj1.lanage);
 
 /**
  *
@@ -31,17 +27,17 @@ console.log(obj2);
  * 3、JSON.parse(   JSON.stringify()   ) 序列化和反序列    JSON在执行字符串化的这个过程时，会先进行一个JSON格式化，获得安全的JSON值，因此如果是非安全的JSON值，就会被丢弃掉。
  *    其中undefined、function、symbol这三种类型的值就是非安全的（包括该对象的属性循环赋值该对象），所以格式化后，就被过滤掉了，而set、map这种数据格式的对象，也并没有被正确处理，而是处理成了一个空对象
  *
- * 3、object.assgn()   属于浅拷贝
+ * 4、object.assgn()   属于浅拷贝
  *
  *
- * 待完善：考虑 正则，Date这种类型的数据
+ * 
  * 类型判断的方法 对比   typeof    其中typeof返回的类型都是字符串形式
- *                    instanceof  通常用于typeof结果为object时，判断是否是具体制定的类型（注意类型需要大小写精确）  eg:  [1,2,3] instanceof Array   // true
- *                    Object.prototype.toString.call()  对象原型链判断方法：   eg:  Object.prototype.toString.call({name: 'Hello'})   // [object Object]
- *                    constructor   判断方法跟instanceof相似,但是constructor检测Object与instanceof不一样,constructor还可以处理基本数据类型的检测,不仅仅是对象类型 
- *                      1.null和undefined没有constructor;
-                        2.判断数字时使用(),比如  (123).constructor,如果写成123.constructor会报错
-                        3.constructor在类继承时会出错,因为Object被覆盖掉了,检测结果就不对了
+*                    instanceof  通常用于typeof结果为object时，判断是否是具体制定的类型（注意类型需要大小写精确）  eg:  [1,2,3] instanceof Array   // true
+*                    Object.prototype.toString.call()  对象原型链判断方法：   eg:  Object.prototype.toString.call({name: 'Hello'})   // [object Object]
+*                    constructor   判断方法跟instanceof相似,但是constructor检测Object与instanceof不一样,constructor还可以处理基本数据类型的检测,不仅仅是对象类型 
+*       1.null和undefined没有constructor;
+        2.判断数字时使用(),比如  (123).constructor,如果写成123.constructor会报错
+        3.constructor在类继承时会出错,因为Object被覆盖掉了,检测结果就不对了
  * */
 
 /**
@@ -52,17 +48,29 @@ console.log(obj2);
 
 function deepClone(source) {
   if (source == null) return null;
+  if (typeof source !== 'object') return source;
+  // 如果是正则
+  if (source instanceof RegExp){
+    return new RegExp(source);
+  }
+   // 如果是日期
+   if (source instanceof Date){
+    return new Date(source);
+  }
 
-  var target = dataType(source) == "Object" ? {} : [];
+  // 不直接创建空对象的目的：克隆的结果和之前保持相同的所属类
+
+  var target = dataType(source) == "Object" ? new source.constructor : [];
   // 遍历source的所有可枚举属性
-  for (item in source) {
+  for (key in source) {
+    
     if (
-      dataType(source[item]) == "Object" ||
-      dataType(source[item]) == "Array"
+      dataType(source[key]) == "Object" ||
+      dataType(source[key]) == "Array"
     ) {
-      target[item] = deepClone(source[item]);
+      target[key] = deepClone(source[key]);
     } else {
-      target[item] = source[item];
+      target[key] = source[key];
     }
   }
   return target;
