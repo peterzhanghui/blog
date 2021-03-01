@@ -7,11 +7,13 @@
  *
  * */
 // 防抖
-function debounce(fn, wait) {
+function debounce(func, wait) {
   var timeout = null;
-  return function () {
+  return function (...args) {
     if (timeout !== null) clearTimeout(timeout);
-    timeout = setTimeout(fn, wait);
+    timeout = setTimeout(()=>{
+      func.apply(this, args)
+    }, wait);
   };
 }
 // 处理函数
